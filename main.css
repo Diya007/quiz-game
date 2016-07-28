@@ -1,0 +1,84 @@
+body{
+	font-family: 'Indie Flower', cursive;
+}
+
+h1{
+	text-align: center;
+}
+
+#logo{
+	text-align: center;
+}
+
+#title{
+	text-align: center;
+	padding-top: -100px;
+
+    
+}
+
+#dog-head {
+	
+    height: 150px;
+    width: 150px;
+    border-style: solid;
+	margin-left: 70px;
+	border-radius:50%;
+}
+
+#question-wrap {
+	width: 400px;
+	height: 200px;
+	border-style: solid;
+	position: relative;
+	-moz-border-radius:    10px;
+	-webkit-border-radius: 10px;
+	border-radius:         10px;
+	padding-left: 100px;
+	padding-top:50px;
+	margin-left: 350px;
+	font-size: 20px;
+	margin-top: -80px
+
+}
+
+
+
+#submit{
+	width:100px;
+	margin-top: 10px;
+	margin-left: 110px;
+	box-shadow: 8px 8px 3px #888888
+
+}
+
+#righ-answer{
+	float: left;
+	margin-left: 400px;
+	margin-top: 40px;
+
+}
+
+#wrong-answer{
+	float:right;
+	margin-right: 400px;
+	margin-top: 40px;
+	
+}
+
+#happy{
+	height:80px;
+    border-style: solid;
+	border-radius:50%;	
+}
+
+#sad{
+	height:80px;
+    border-style: solid;
+	border-radius:50%;
+
+}
+
+#score-holder{
+
+}
