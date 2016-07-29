@@ -28,6 +28,21 @@ $(document).ready(function(){
 		{question:"how many weights can puppies grow up in first five months?",
 		choices:["1/2 their body weight","1/3 their body weight","3/4 their body weight"],
 		answer:0,
+		},
+
+		{question:"Normal adult dogs have how many teeth?",
+		choices:["24","38","42"],
+		answer:2,
+		},
+
+		{question:"Through what part of the body do dogs sweat?",
+		choices:["mouth","paws","nose"],
+		answer:1,
+		},
+
+		{question:"What is the most common training command taught to dogs?",
+		choices:["stay","sit","beg"],
+		answer:1,
 		}
 		
 	]
@@ -36,62 +51,67 @@ $(document).ready(function(){
     var count;
     var score;
     var newQuestion
+    var newButton;
+    var choices;
 
 	function newGame(){
 		cur=0;
 		//count question num 
-		count=0;
+		count=1;
 		newQuestion ='<div id="count-question">'+"Q  "+count+'</div><span class="question">'+questionsArr[cur].question+'</span>'
 		$("#question-wrap").append(newQuestion)
 		for(var i=0;i<3;i++){
-			var choices = '<div id="answer-holder"><input type="radio" name="option" value='+i+'><span class="answer">'+questionsArr[cur].choices[i]+'</span>'
+			choices = '<div id="answer-holder"><input type="radio" name="option" value='+i+'><span class="answer">'+questionsArr[cur].choices[i]+'</span>'
 			$("#question-wrap").append(choices);
 		}
-		var newButton = '<div id="button-holder"><input type="button" id="submit" value="submit"></div>'
+		newButton = '<div id="button-holder"><input type="button" id="submit" value="submit"></div>'
 		 $("#question-wrap").append(newButton);
+
 	}
 
 	newGame()
 
 	$('#submit').on("click",function(){
-		cur++
-		//点完submit之后第一下还是0，点第二下才是1；
-		$("#count-question").html('Q '+count++)
-		//把选择的answer收集起来
-
-		updateScore();
-		nextQuestion();
 		
+		//点完submit之后第一下还是0，点第二下才是1；
+		//$("#count-question").append('Q '+count++)
+		//把选择的answer收集起来
+        count++;
+		//updateScore();
+		cur++
+		nextQuestion();
+		updateScore();
 	})
 
   
 //the user's socre will be counted
 
-function updateScore(){
-	var checkedAnswer = $("input[type='radio']:checked").val();
-      
-		if(questionsArr[cur].answer == checkedAnswer){
-			$('#righ-answer').css("color", "red")
-			$('#score').html(score++)
-		}
-		else{
-			$('#wrong-answer').css("color", "blue")
-		}
-}
+	function updateScore(){
 
+		var checkedAnswer = $("input[type='radio']:checked").val();
 
-function nextQuestion(){
-	if(cur<5){
-		newQuestion ='<div id="count-question">'+"Q  "+count+'</div><span class="question">'+questionsArr[cur].question+'</span>'
-		$("#question-wrap").append(newQuestion)
-		for(var i=0;i<3;i++){
-			var choices = '<div id="answer-holder"><input type="radio" name="option" value='+i+'><span class="answer">'+questionsArr[cur].choices[i]+'</span>'
-			$("#question-wrap").html(choices);
-		}
+			if(questionsArr[cur].answer == checkedAnswer){
+				$('#righ-answer').css("color", "red")
+				var newScore = 
+				$('#score').append(score++)
+			}
+			else{
+				$('#wrong-answer').css("color", "blue")
+			}
 	}
+
+
+	function nextQuestion(){
         
-        
-}
+    	newQuestion = '<div id="count-question">'+"Q  "+count+'</div><span class="question">'+questionsArr[cur].question+'</span>'
+    	$("#question-wrap").html(newQuestion)
+    	for(var j =0; j<3;j++) {
+			choices = '<div id="answer-holder"><input type="radio" name="option" value='+j+'><span class="answer">'+questionsArr[cur].choices[j]+'</span>'
+			$("#question-wrap").append(choices)
+		}
+		$("#question-wrap").append(newButton)
+		
+	}
 
 })
 

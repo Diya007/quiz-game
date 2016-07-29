@@ -10,17 +10,11 @@ h1{
 	text-align: center;
 }
 
-#title{
-	text-align: center;
-	padding-top: -100px;
 
-    
-}
 
 #dog-head {
-	
-    height: 150px;
-    width: 150px;
+    height:150px;
+    width:150px;
     border-style: solid;
 	margin-left: 70px;
 	border-radius:50%;
@@ -34,9 +28,11 @@ h1{
 	-moz-border-radius:    10px;
 	-webkit-border-radius: 10px;
 	border-radius:         10px;
-	padding-left: 100px;
-	padding-top:50px;
-	margin-left: 350px;
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-top:20px;
+	padding-bottom: 20px;
+	margin-left: 400px;
 	font-size: 20px;
 	margin-top: -80px
 
@@ -54,8 +50,9 @@ h1{
 
 #righ-answer{
 	float: left;
-	margin-left: 400px;
+	margin-left: 450px;
 	margin-top: 40px;
+	font-size: 20px;
 
 }
 
@@ -63,6 +60,7 @@ h1{
 	float:right;
 	margin-right: 400px;
 	margin-top: 40px;
+	font-size: 20px;
 	
 }
 
