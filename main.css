@@ -40,7 +40,7 @@ h1{
 
 
 
-#submit{
+#submit, #gameButton {
 	width:100px;
 	margin-top: 10px;
 	margin-left: 110px;

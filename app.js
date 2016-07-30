@@ -17,6 +17,9 @@
 	//shows new game button
 
 
+//Prevents the user from skipping questions
+
+
 $(document).ready(function(){
 
 	var questionsArr=[
@@ -49,16 +52,18 @@ $(document).ready(function(){
     
     var cur ;
     var count;
-    var score;
+    var score =0;
     var newQuestion
     var newButton;
     var choices;
+    var remainQuestion
 
 	function newGame(){
 		cur=0;
 		//count question num 
 		count=1;
-		newQuestion ='<div id="count-question">'+"Q  "+count+'</div><span class="question">'+questionsArr[cur].question+'</span>'
+		remainQuestion=5-count;
+		newQuestion ='<div id="count-question">'+"Q  "+count+" /You have "+remainQuestion+' questions left'+'</div><span class="question">'+questionsArr[cur].question+'</span>'
 		$("#question-wrap").append(newQuestion)
 		for(var i=0;i<3;i++){
 			choices = '<div id="answer-holder"><input type="radio" name="option" value='+i+'><span class="answer">'+questionsArr[cur].choices[i]+'</span>'
@@ -66,34 +71,59 @@ $(document).ready(function(){
 		}
 		newButton = '<div id="button-holder"><input type="button" id="submit" value="submit"></div>'
 		 $("#question-wrap").append(newButton);
+ 		score=0;
+		 $('#newScore').text(score);
 
 	}
 
 	newGame()
 
-	$('#submit').on("click",function(){
+	$(document).on("click",'#submit',function(){
 		
-		//点完submit之后第一下还是0，点第二下才是1；
+		
 		//$("#count-question").append('Q '+count++)
-		//把选择的answer收集起来
-        count++;
-		//updateScore();
-		cur++
-		nextQuestion();
-		updateScore();
+		if($("input[type='radio']:checked").val()){
+
+	        count++;
+	        remainQuestion--;
+			//updateScore();
+			updateScore();
+			cur++
+			nextQuestion();
+		}
+		else{
+			alert("Please select an answer!")
+		}
+		
 	})
+
+	$(document).on("click",'#gameButton',function(){
+		$("#question-wrap").html("");
+		$('#righ-answer,#wrong-answer').css("color","black");
+		newGame()
+
+	})
+
+
+	/*$("#question-wrap")delegate.("#submit","click",function(){
+		count++;
+		updateScore();
+		cur++;
+		nextQuestion();
+
+	})*/
 
   
 //the user's socre will be counted
 
 	function updateScore(){
-
+       
 		var checkedAnswer = $("input[type='radio']:checked").val();
-
+            $('#righ-answer,#wrong-answer').css("color","black");
 			if(questionsArr[cur].answer == checkedAnswer){
 				$('#righ-answer').css("color", "red")
-				var newScore = 
-				$('#score').append(score++)
+				score++
+				$('#newScore').text(score)
 			}
 			else{
 				$('#wrong-answer').css("color", "blue")
@@ -102,15 +132,31 @@ $(document).ready(function(){
 
 
 	function nextQuestion(){
-        
-    	newQuestion = '<div id="count-question">'+"Q  "+count+'</div><span class="question">'+questionsArr[cur].question+'</span>'
-    	$("#question-wrap").html(newQuestion)
-    	for(var j =0; j<3;j++) {
-			choices = '<div id="answer-holder"><input type="radio" name="option" value='+j+'><span class="answer">'+questionsArr[cur].choices[j]+'</span>'
-			$("#question-wrap").append(choices)
-		}
-		$("#question-wrap").append(newButton)
+    	if(cur<5){
+
+	    	newQuestion = '<div id="count-question">'+"Q  "+count+" /You have "+remainQuestion+' questions left'+'</div><span class="question">'+questionsArr[cur].question+'</span>'
+	    	$("#question-wrap").html(newQuestion)
+
+	    	for(var j =0; j<3;j++) {
+				choices = '<div id="answer-holder"><input type="radio" name="option" value='+j+'><span class="answer">'+questionsArr[cur].choices[j]+'</span>'
+				$("#question-wrap").append(choices)
+			}
+			$("#question-wrap").append(newButton)
 		
+		}
+		//remove everything in question wrap;
+		//add sentence : do you want to start a new game?
+		//newGame buttton;
+		else{
+			$("#question-wrap").html("Do you want to start a new game?");
+			var newGameButton = '<div id="button-holder"><input type="button" id="gameButton" value="New Game"></div>'
+		 	$("#question-wrap").append(newGameButton);
+
+
+	
+
+
+		}
 	}
 
 })
